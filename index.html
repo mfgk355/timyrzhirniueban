@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Тимур жирный уебан «Нет»!</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #e0e7ff 100%);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      color: #2d3748;
+      margin-bottom: 40px;
+      text-align: center;
+      max-width: 90%;
+    }
+
+    .btn-yes {
+      padding: 14px 36px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      background: linear-gradient(to right, #4361ee, #3a0ca3);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      margin-bottom: 30px;
+      transition: transform 0.2s;
+    }
+
+    .btn-yes:hover {
+      transform: scale(1.05);
+    }
+
+    #btn-no {
+      position: absolute;
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      background: linear-gradient(to right, #ff6b6b, #ff8e8e);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.2s;
+      z-index: 10;
+    }
+
+    #btn-no:hover {
+      transform: scale(1.1);
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #2ecc71;
+      height: 32px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Тимур жирный уебан</h1>
+  <button class="btn-yes" onclick="showCorrect()">Да</button>
+  <div id="result"></div>
+
+  <button id="btn-no">Нет</button>
+
+  <script>
+    const btnNo = document.getElementById('btn-no');
+
+    function getRandomPosition() {
+      const maxX = window.innerWidth - btnNo.offsetWidth;
+      const maxY = window.innerHeight - btnNo.offsetHeight;
+      const x = Math.max(0, Math.floor(Math.random() * maxX));
+      const y = Math.max(0, Math.floor(Math.random() * maxY));
+      return { x, y };
+    }
+
+    function jumpAway() {
+      const { x, y } = getRandomPosition();
+      btnNo.style.left = x + 'px';
+      btnNo.style.top = y + 'px';
+    }
+
+    // Перемещаем кнопку при наведении
+    btnNo.addEventListener('mouseover', jumpAway);
+    // И даже если кто-то быстро кликнет — тоже убежит!
+    btnNo.addEventListener('click', (e) => {
+      e.preventDefault();
+      jumpAway();
+    });
+
+    // Изначально размещаем кнопку внизу по центру
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const x = (window.innerWidth - btnNo.offsetWidth) / 2;
+        const y = window.innerHeight - btnNo.offsetHeight - 50;
+        btnNo.style.left = x + 'px';
+        btnNo.style.top = y + 'px';
+        btnNo.style.position = 'absolute';
+      }, 100);
+    });
+
+    function showCorrect() {
+      document.getElementById('result').textContent = 'да у него была даже швабра в жопе';
+    }
+  </script>
+
+</body>
+</html>
